@@ -78,8 +78,11 @@ public class Aula04 extends Aula {
 
 
     protected double maiorNotaHomens(@NonNull final Stream<Estudante> stream){
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+        return stream
+                .filter(Estudante::isHomem)
+                .mapToDouble(Estudante::getNota)
+                .max()
+                .orElse(-1);
     }
 }
 
