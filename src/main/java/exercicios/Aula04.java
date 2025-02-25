@@ -3,6 +3,7 @@ package exercicios;
 import exercicios.base.Aula;
 import lombok.NonNull;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -49,7 +50,7 @@ public class Aula04 extends Aula {
 
     protected double maiorNotaCursoAndSexo(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso, final char sexo) {
         return stream
-                .filter(estudante -> estudante.getCurso().equals(curso) && estudante.getSexo() == sexo)
+                .filter(estudante -> Optional.ofNullable(estudante.getCurso()).orElse(new Curso()).equals(curso) && estudante.getSexo() == sexo)
                 .mapToDouble(Estudante::getNota)
                 .max()
                 .orElse(-1);
@@ -57,13 +58,13 @@ public class Aula04 extends Aula {
 
     protected long totalEstudantesCursoAndSexo(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso, final char sexo) {
         return stream
-                .filter(estudante -> estudante.getCurso().equals(curso) && estudante.getSexo() == sexo)
+                .filter(estudante -> Optional.ofNullable(estudante.getCurso()).orElse(new Curso()).equals(curso) && estudante.getSexo() == sexo)
                 .count();
     }
 
     protected double mediaNotaTodosEstudantesCurso(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso){
         return stream
-                .filter(estudante -> estudante.getCurso().equals(curso))
+                .filter(estudante -> Optional.ofNullable(estudante.getCurso()).orElse(new Curso()).equals(curso))
                 .mapToDouble(Estudante::getNota)
                 .average()
                 .orElse(-1);
