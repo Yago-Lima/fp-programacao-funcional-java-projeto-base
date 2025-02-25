@@ -70,8 +70,10 @@ public class Aula04 extends Aula {
     }
 
     protected double maiorNotaTodosEstudantes(@NonNull final Stream<Estudante> stream){
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+        return stream
+                .mapToDouble(Estudante::getNota)
+                .max()
+                .orElse(-1);
     }
 
 
